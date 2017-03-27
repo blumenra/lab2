@@ -5,6 +5,8 @@ int main(int argc, char** argv){
 
 	int i;
 
+	int* p;
+
 	int iarray[] = {1,2,3};
 	char carray[] = {'a','b','c'};
 	int* iarrayPtr;
@@ -26,5 +28,7 @@ int main(int argc, char** argv){
 
 	puts("");
 	
+	printf("%p\n", p);
+
 	return 0;
 }
