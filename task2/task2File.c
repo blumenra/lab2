@@ -17,21 +17,23 @@ char censor(char c) ;
 char* map(char *array, int array_length, char (*f) (char));
  
 
+char quit(char c); /* Gets a char c, and ends the program using c as the return value */
+
+
 int main(int argc, char **argv){
 	int base_len = 5;
 	char arr1[base_len];
 	char* arr2 = map(arr1, base_len, my_get);
 	char* arr3 = map(arr2, base_len, encrypt);
-	// printf("%d\n", arr3[4]);
 	char* arr4 = map(arr3, base_len, xprt);
 	char* arr5 = map(arr4, base_len, decrypt);
 	char* arr6 = map(arr5, base_len, cprt);
-	// free(arr2);
-	// free(arr3);
-	// free(arr4);
-	// free(arr5);
-	// free(arr6);
-	// free(arr2);
+	free(arr2);
+	free(arr3);
+	free(arr4);
+	free(arr5);
+	free(arr6);
+	free(arr2);
 }
 
 
@@ -124,6 +126,13 @@ char cprt(char c){
 		
 		puts(".");
 	}
+
+	return c;
+}
+
+char quit(char c){
+
+	exit(0);
 
 	return c;
 }
