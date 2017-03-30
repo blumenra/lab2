@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 char encrypt(char c); /* Gets a char c and returns its encrypted form by adding 3 to its value. 
           If c is not between 0x20 and 0x7E it is returned unchanged */
@@ -28,22 +29,25 @@ struct fun_desc {
 int main(int argc, char** argv){
 	
 
+
+	char carray[5]= {0, 0, 0, 0, 0};
+	// char* arr = carray;
+	char inputOp[2];
+	int intOp = 6;
+	struct fun_desc funcs[] = {
+								{"Censor", censor},
+								{"Encrypt", encrypt},
+								{"Decrypt", decrypt},
+								{"Print hex", xprt},
+								{"Print string",cprt},
+								{"Get string", my_get},
+								{"Quit", quit},
+								{NULL, NULL}
+							};
+
 	while(1){
-
-		char carray[5] = "";
+		
 		int i=0;
-		int inputOp;
-
-		struct fun_desc funcs[] = {
-									{"Censor", censor},
-									{"Encrypt", encrypt},
-									{"Decrypt", decrypt},
-									{"Print hex", xprt},
-									{"Print string",cprt},
-									{"Get string", my_get},
-									{"Quit", quit},
-									{NULL, NULL}
-								};
 
 		printf("Please choose a function:\n");
 
@@ -54,9 +58,12 @@ int main(int argc, char** argv){
 		}
 
 		printf("Option: ");
-		fscanf(stdin, "%d", &inputOp);
+		strcpy(inputOp, map(inputOp, 2, funcs[5].fun));
+		intOp = atoi(inputOp);
+		printf("intOp: %d\n", intOp);
+		printf("carray[0]: %c\n", carray[0]);
 
-		if((inputOp >= 0) && (inputOp <= 6)){
+		if((intOp >= 0) && (intOp <= 6)){
 
 			printf("Within bounds\n");
 		}
@@ -66,12 +73,13 @@ int main(int argc, char** argv){
 			quit('a');
 		}
 
-		strcpy(carray, map(carray, 5, funcs[inputOp].fun));
-		printf("Done.\n");
+		strcpy(carray, map(carray, 5, funcs[intOp].fun));
+		printf("DONE.\n\n");
 	}
 
 
-	return 0;
+    return 0;
+
 }
 
 
@@ -84,6 +92,7 @@ char censor(char c) {
 }
 
 char* map(char *array, int array_length, char (*f) (char)){
+  
   char* mapped_array = (char*)(malloc(array_length*sizeof(char)));
   
   int i;
