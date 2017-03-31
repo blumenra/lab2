@@ -31,8 +31,9 @@ int main(int argc, char** argv){
 
 
 	char carray[5]= {0, 0, 0, 0, 0};
-	// char* arr = carray;
+	char* arr = carray;
 	char inputOp[2];
+	char* inputOpPtr = inputOp;
 	int intOp = 6;
 	struct fun_desc funcs[] = {
 								{"Censor", censor},
@@ -58,10 +59,8 @@ int main(int argc, char** argv){
 		}
 
 		printf("Option: ");
-		strcpy(inputOp, map(inputOp, 2, funcs[5].fun));
-		intOp = atoi(inputOp);
-		printf("intOp: %d\n", intOp);
-		printf("carray[0]: %c\n", carray[0]);
+		inputOpPtr = map(inputOpPtr, 2, funcs[5].fun);
+		intOp = atoi(inputOpPtr);
 
 		if((intOp >= 0) && (intOp <= 6)){
 
@@ -70,10 +69,12 @@ int main(int argc, char** argv){
 		else{
 			
 			printf("Not within bounds\n");
+			free(arr);
+			free(inputOpPtr);
 			quit('a');
 		}
 
-		strcpy(carray, map(carray, 5, funcs[intOp].fun));
+		arr = map(arr, 5, funcs[intOp].fun);
 		printf("DONE.\n\n");
 	}
 
