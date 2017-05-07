@@ -35,6 +35,7 @@ int main(int argc, char** argv){
 	char inputOp[2];
 	char* inputOpPtr = inputOp;
 	int intOp = 6;
+	int firstTime = 1;
 	struct fun_desc funcs[] = {
 								{"Censor", censor},
 								{"Encrypt", encrypt},
@@ -63,14 +64,17 @@ int main(int argc, char** argv){
 		intOp = atoi(inputOpPtr);
 
 		if((intOp >= 0) && (intOp <= 6)){
-
 			printf("Within bounds\n");
+			firstTime = 0;
 		}
 		else{
 			
 			printf("Not within bounds\n");
-			free(arr);
-			free(inputOpPtr);
+			if(!firstTime){
+
+				free(arr);
+				free(inputOpPtr);
+			}
 			quit('a');
 		}
 
